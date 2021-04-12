@@ -2,7 +2,6 @@ package com.example.neighbors.repositories
 
 import android.app.Application
 import androidx.lifecycle.LiveData
-import com.example.neighbors.dal.memory.DummyNeighborApiService
 import com.example.neighbors.dal.NeighborApiService
 import com.example.neighbors.dal.room.RoomNeighborDataSource
 import com.example.neighbors.models.Neighbor

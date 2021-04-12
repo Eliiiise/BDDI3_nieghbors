@@ -1,7 +1,6 @@
 package com.example.neighbors.ui.fragments
 
 import android.app.AlertDialog
-import android.app.Application
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -10,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -17,14 +17,17 @@ import com.example.neighbors.NavigationListener
 import com.example.neighbors.R
 import com.example.neighbors.adapters.ListNeighborHandler
 import com.example.neighbors.adapters.ListNeighborsAdapter
-import com.example.neighbors.repositories.NeighborRepository
 import com.example.neighbors.databinding.ListNeighborsFragmentBinding
+import com.example.neighbors.di.DI
 import com.example.neighbors.models.Neighbor
+import com.example.neighbors.viewmodels.NeighborViewModel
+import java.util.concurrent.Executors
 
 class ListNeighborsFragment : Fragment(), ListNeighborHandler {
 
     private lateinit var recyclerView: RecyclerView
     lateinit var binding: ListNeighborsFragmentBinding
+    private lateinit var viewModel: NeighborViewModel
 
     /**
      * Fonction permettant de définir une vue à attacher à un fragment
@@ -49,6 +52,8 @@ class ListNeighborsFragment : Fragment(), ListNeighborHandler {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        viewModel = ViewModelProvider(this).get(NeighborViewModel::class.java)
         (activity as? NavigationListener)?.let {
             it.updateTitle(R.string.list_neighbor)
         }
@@ -59,21 +64,18 @@ class ListNeighborsFragment : Fragment(), ListNeighborHandler {
     }
 
     private fun setData() {
-        // Récupérer l'instance de l'application, si elle est null arrêter l'exécution de la méthode
-        val application: Application = activity?.application ?: return
-
-        val neighbors = NeighborRepository.getInstance(application).getNeighbours()
-        neighbors.observe(viewLifecycleOwner) {
+        viewModel.neighbors.observe(viewLifecycleOwner) {
             val adapter = ListNeighborsAdapter(it, this)
             binding.neighborsList.adapter = adapter
         }
     }
 
     private fun delete(neighbor: Neighbor) {
-        // Récupérer l'instance de l'application, si elle est null arrêter l'exécution de la méthode
-        val application: Application = activity?.application ?: return
+        Executors.newSingleThreadExecutor().execute {
+            DI.repository.deleteNeighbor(neighbor)
+        }
 
-        NeighborRepository.getInstance(application).deleteNeighbor(neighbor)
+        binding.neighborsList.adapter?.notifyDataSetChanged()
     }
 
     override fun onDeleteNeibor(neighbor: Neighbor) {
@@ -99,10 +101,7 @@ class ListNeighborsFragment : Fragment(), ListNeighborHandler {
     }
 
     override fun onAddFavorite(neighbor: Neighbor) {
-        // Récupérer l'instance de l'application, si elle est null arrêter l'exécution de la méthode
-        val application: Application = activity?.application ?: return
-
-        NeighborRepository.getInstance(application).onFavorite(neighbor)
+        DI.repository.onFavorite(neighbor)
     }
 
     override fun goWebsite(neighbor: Neighbor) {

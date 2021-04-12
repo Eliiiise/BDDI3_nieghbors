@@ -6,6 +6,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import com.example.neighbors.NavigationListener
 import com.example.neighbors.R
+import com.example.neighbors.di.DI
 import com.example.neighbors.ui.fragments.ListNeighborsFragment
 
 class NeighborsActivity : AppCompatActivity(), NavigationListener {
@@ -13,6 +14,8 @@ class NeighborsActivity : AppCompatActivity(), NavigationListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        DI.inject(application)
 
         setContentView(R.layout.neighbors_activity)
         toolbar = findViewById(R.id.toolbar)

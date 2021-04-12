@@ -14,12 +14,12 @@ class DummyNeighborApiService : NeighborApiService {
 
     // s'éxecute à la création de ma classe
     init {
-        _neighbours.value = DUMMY_NeighborS.toList()
+        _neighbours.postValue(DUMMY_NeighborS)
     }
 
     override fun deleteNeighbour(neighbor: Neighbor) {
         DUMMY_NeighborS.remove(neighbor)
-        _neighbours.value = DUMMY_NeighborS.toList()
+        _neighbours.postValue(DUMMY_NeighborS)
     }
 
     override fun createNeighbour(neighbor: Neighbor) {

@@ -12,7 +12,9 @@ import com.example.neighbors.NavigationListener
 import com.example.neighbors.R
 import com.example.neighbors.repositories.NeighborRepository
 import com.example.neighbors.databinding.AddNeighborBinding
+import com.example.neighbors.di.DI
 import com.example.neighbors.models.Neighbor
+import java.util.concurrent.Executors
 
 class AddNeighborsFragment : Fragment() {
 
@@ -104,10 +106,9 @@ class AddNeighborsFragment : Fragment() {
                     webSite = textWebSite.text.toString()
                 )
 
-                // Récupérer l'instance de l'application, si elle est null arrêter l'exécution de la méthode
-                val application: Application = activity?.application ?: return@setOnClickListener
-
-                NeighborRepository.getInstance(application).addNeighbor(neighbor)
+                Executors.newSingleThreadExecutor().execute {
+                    DI.repository.addNeighbor(neighbor)
+                }
 
                 (activity as? NavigationListener)?.let {
                     it.showFragment(ListNeighborsFragment())

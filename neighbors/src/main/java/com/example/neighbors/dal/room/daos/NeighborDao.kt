@@ -2,6 +2,7 @@ package com.example.neighbors.dal.room.daos
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import com.example.neighbors.dal.room.entities.NeighborEntity
@@ -13,4 +14,7 @@ interface NeighborDao {
 
     @Insert
     fun add(vararg neighborEntity: NeighborEntity)
+
+    @Delete
+    fun deleteNeighbor(entity: NeighborEntity)
 }
