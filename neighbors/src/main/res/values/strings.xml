@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Voisins</string>
+    <string name="cancel">Retour</string>
+    <string name="ok">Ok</string>
+    <string name="confirm_delete">Confirmer suppression</string>
+    <string name="message_delete">Êtes vous sur de vouloir supprimer le voisin</string>
+    <string name="webste">Site web</string>
+    <string name="t_l_phone">Téléphone</string>
+    <string name="nom">Nom</string>
+    <string name="image">Image</string>
+    <string name="adresse">Adresse</string>
+    <string name="a_propos_de_moi">A propos de moi</string>
+    <string name="enregitrer">Enregitrer</string>
+    <string name="add">Ajouter</string>
+    <string name="error_phone">Le numéro doit être sous le format 0X XX XX XX XX XX</string>
+    <string name="error_link">Le lien n\'est pas valide</string>
+</resources>

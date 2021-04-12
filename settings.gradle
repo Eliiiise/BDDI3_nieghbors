@@ -1,0 +1,4 @@
+include ':neighbors'
+include ':calculator'
+include ':app'
+rootProject.name = "Layouts"
