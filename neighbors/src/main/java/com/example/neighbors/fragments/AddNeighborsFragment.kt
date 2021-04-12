@@ -33,7 +33,7 @@ class AddNeighborsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (activity as? NavigationListener)?.let {
-            it.updateTitle(R.string.error_link)
+            it.updateTitle(R.string.add_neighbor)
         }
 
         detectChanges()

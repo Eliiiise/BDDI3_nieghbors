@@ -50,7 +50,7 @@ class ListNeighborsFragment : Fragment(), ListNeighborHandler {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (activity as? NavigationListener)?.let {
-            it.updateTitle(R.string.a_propos_de_moi)
+            it.updateTitle(R.string.list_neighbor)
         }
 
         setData()
