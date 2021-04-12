@@ -1,10 +1,12 @@
-package com.example.neighbors
+package com.example.neighbors.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
-import com.example.neighbors.fragments.ListNeighborsFragment
+import com.example.neighbors.NavigationListener
+import com.example.neighbors.R
+import com.example.neighbors.ui.fragments.ListNeighborsFragment
 
 class NeighborsActivity : AppCompatActivity(), NavigationListener {
     private lateinit var toolbar: Toolbar

@@ -1,8 +1,9 @@
-package com.example.neighbors.data.service
+package com.example.neighbors.dal.memory
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.neighbors.models.Neighbor
+import com.example.neighbors.dal.NeighborApiService
 
 class DummyNeighborApiService : NeighborApiService {
 

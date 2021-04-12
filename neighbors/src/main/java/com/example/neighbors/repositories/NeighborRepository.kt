@@ -1,15 +1,17 @@
-package com.example.neighbors.data
+package com.example.neighbors.repositories
 
+import android.app.Application
 import androidx.lifecycle.LiveData
-import com.example.neighbors.data.service.DummyNeighborApiService
-import com.example.neighbors.data.service.NeighborApiService
+import com.example.neighbors.dal.memory.DummyNeighborApiService
+import com.example.neighbors.dal.NeighborApiService
+import com.example.neighbors.dal.room.RoomNeighborDataSource
 import com.example.neighbors.models.Neighbor
 
-class NeighborRepository {
+class NeighborRepository private constructor(application: Application) {
     private val apiService: NeighborApiService
 
     init {
-        apiService = DummyNeighborApiService()
+        apiService = RoomNeighborDataSource(application)
     }
 
     fun getNeighbours(): LiveData<List<Neighbor>> = apiService.neighbours
@@ -28,9 +30,9 @@ class NeighborRepository {
 
     companion object {
         private var instance: NeighborRepository? = null
-        fun getInstance(): NeighborRepository {
+        fun getInstance(application: Application): NeighborRepository {
             if (instance == null) {
-                instance = NeighborRepository()
+                instance = NeighborRepository(application)
             }
             return instance!!
         }

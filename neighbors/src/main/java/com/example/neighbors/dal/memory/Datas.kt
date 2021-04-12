@@ -1,4 +1,4 @@
-package com.example.neighbors.data.service
+package com.example.neighbors.dal.memory
 
 import com.example.neighbors.models.Neighbor
 

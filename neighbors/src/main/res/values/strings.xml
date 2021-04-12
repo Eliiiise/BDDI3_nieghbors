@@ -14,4 +14,6 @@
     <string name="add">Ajouter</string>
     <string name="error_phone">Le numéro doit être sous le format 0X XX XX XX XX XX</string>
     <string name="error_link">Le lien n\'est pas valide</string>
+    <string name="add_neighbor">Nouveau voisin</string>
+    <string name="list_neighbor">Liste des voisins</string>
 </resources>

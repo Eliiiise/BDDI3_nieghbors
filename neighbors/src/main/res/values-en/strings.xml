@@ -15,4 +15,6 @@
     <string name="add">Add</string>
     <string name="error_phone">Phone number must be 0X XX XX XX XX XX</string>
     <string name="error_link">Invalid url</string>
+    <string name="add_neighbor">New neighbor</string>
+    <string name="list_neighbor">List neighbor</string>
 </resources>

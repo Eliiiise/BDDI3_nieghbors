@@ -1,4 +1,4 @@
-package com.example.neighbors.data.service
+package com.example.neighbors.dal
 
 import androidx.lifecycle.LiveData
 import com.example.neighbors.models.Neighbor

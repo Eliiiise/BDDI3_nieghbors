@@ -1,16 +1,16 @@
-package com.example.neighbors.fragments
+package com.example.neighbors.ui.fragments
 
+import android.app.Application
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.doAfterTextChanged
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.example.neighbors.NavigationListener
 import com.example.neighbors.R
-import com.example.neighbors.data.NeighborRepository
+import com.example.neighbors.repositories.NeighborRepository
 import com.example.neighbors.databinding.AddNeighborBinding
 import com.example.neighbors.models.Neighbor
 
@@ -33,7 +33,7 @@ class AddNeighborsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (activity as? NavigationListener)?.let {
-            it.updateTitle(R.string.error_link)
+            it.updateTitle(R.string.add_neighbor)
         }
 
         detectChanges()
@@ -103,7 +103,11 @@ class AddNeighborsFragment : Fragment() {
                     favorite = false,
                     webSite = textWebSite.text.toString()
                 )
-                NeighborRepository.getInstance().addNeighbor(neighbor)
+
+                // Récupérer l'instance de l'application, si elle est null arrêter l'exécution de la méthode
+                val application: Application = activity?.application ?: return@setOnClickListener
+
+                NeighborRepository.getInstance(application).addNeighbor(neighbor)
 
                 (activity as? NavigationListener)?.let {
                     it.showFragment(ListNeighborsFragment())
