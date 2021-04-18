@@ -30,11 +30,11 @@ class DummyNeighborApiService : NeighborApiService {
     override fun updateFavoriteStatus(neighbor: Neighbor) {
         _neighbours.postValue(DUMMY_NeighborS)
 
-        /*DUMMY_NeighborS.find {
+        DUMMY_NeighborS.find {
             it.id == neighbor.id
         }?.let {
             it.favorite = !it.favorite
-        }*/
+        }
     }
 
     override fun updateDataNeighbour(neighbor: Neighbor) {

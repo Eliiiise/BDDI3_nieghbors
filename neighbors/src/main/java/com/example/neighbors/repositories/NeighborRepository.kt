@@ -3,14 +3,24 @@ package com.example.neighbors.repositories
 import android.app.Application
 import androidx.lifecycle.LiveData
 import com.example.neighbors.dal.NeighborApiService
+import com.example.neighbors.dal.memory.DummyNeighborApiService
 import com.example.neighbors.dal.room.RoomNeighborDataSource
 import com.example.neighbors.models.Neighbor
 
 class NeighborRepository private constructor(application: Application) {
-    private val apiService: NeighborApiService
+    private var apiService: NeighborApiService
+    private val application = application
 
     init {
         apiService = RoomNeighborDataSource(application)
+    }
+
+    fun dataSourceInMemory(inMemory: Boolean) {
+        if (inMemory) {
+            apiService = RoomNeighborDataSource(application)
+        } else {
+            apiService = DummyNeighborApiService()
+        }
     }
 
     fun getNeighbours(): LiveData<List<Neighbor>> = apiService.neighbours

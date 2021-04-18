@@ -75,10 +75,14 @@ class ListNeighborsFragment : Fragment(), ListNeighborHandler {
         when (item.itemId) {
             R.id.menu_no_persistent -> {
                 persitent = false
+                DI.repository.dataSourceInMemory(persitent)
+                setData()
             }
 
             R.id.menu_persistent -> {
                 persitent = true
+                DI.repository.dataSourceInMemory(persitent)
+                setData()
             }
 
             else -> super.onOptionsItemSelected(item)
@@ -88,13 +92,6 @@ class ListNeighborsFragment : Fragment(), ListNeighborHandler {
     }
 
     private fun setData() {
-        /* if (persitent) {
-            viewModel.neighbors.observe(viewLifecycleOwner) {
-                val adapter = ListNeighborsAdapter(it, this)
-                binding.neighborsList.adapter = adapter
-            }
-        } */
-
         viewModel.neighbors.observe(viewLifecycleOwner) {
             val adapter = ListNeighborsAdapter(it, this)
             binding.neighborsList.adapter = adapter

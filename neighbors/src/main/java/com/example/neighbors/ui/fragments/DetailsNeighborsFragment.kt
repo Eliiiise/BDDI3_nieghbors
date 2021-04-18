@@ -1,18 +1,23 @@
 package com.example.neighbors.ui.fragments
 
 import android.os.Bundle
+import android.text.method.ScrollingMovementMethod
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.bumptech.glide.request.RequestOptions
 import com.example.neighbors.NavigationListener
 import com.example.neighbors.R
 import com.example.neighbors.databinding.DetailsNeighborBinding
 import com.example.neighbors.di.DI
 import com.example.neighbors.models.Neighbor
 import java.util.concurrent.Executors
+
 
 class DetailsNeighborsFragment(neighbor: Neighbor) : Fragment() {
     lateinit var binding: DetailsNeighborBinding
@@ -23,9 +28,9 @@ class DetailsNeighborsFragment(neighbor: Neighbor) : Fragment() {
      * Fonction permettant de définir une vue à attachée à un fragment
      */
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.details_neighbor, container, false)
         return binding.root
@@ -38,6 +43,8 @@ class DetailsNeighborsFragment(neighbor: Neighbor) : Fragment() {
         }
 
         neighborSelected?.let { initData(it) }
+
+        binding.detailsBio.setMovementMethod(ScrollingMovementMethod())
     }
 
     private fun initData(neighbor: Neighbor) {
@@ -50,7 +57,15 @@ class DetailsNeighborsFragment(neighbor: Neighbor) : Fragment() {
         isFavorite = neighbor.favorite
         loadImagefavorite()
 
-        Glide.with(this).load(neighbor.avatarUrl).placeholder(R.drawable.ic_baseline_perm_identity_24).error(R.drawable.ic_baseline_perm_identity_24).into(binding.detailsImage)
+        var requestOptions = RequestOptions()
+        requestOptions = requestOptions.transforms(CenterCrop(), RoundedCorners(120))
+
+        Glide.with(this)
+                .load(neighbor.avatarUrl)
+                .apply(requestOptions)
+                .placeholder(R.drawable.ic_baseline_perm_identity_24)
+                .error(R.drawable.ic_baseline_perm_identity_24)
+                .into(binding.detailsImage)
 
         binding.detailsLikeButton.setOnClickListener {
             onAddFavorite(neighbor)
