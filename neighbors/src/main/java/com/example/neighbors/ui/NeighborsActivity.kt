@@ -18,6 +18,7 @@ class NeighborsActivity : AppCompatActivity(), NavigationListener {
         DI.inject(application)
 
         setContentView(R.layout.neighbors_activity)
+
         toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
 

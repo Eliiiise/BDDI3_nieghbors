@@ -4,9 +4,7 @@ import android.app.AlertDialog
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -28,6 +26,7 @@ class ListNeighborsFragment : Fragment(), ListNeighborHandler {
     private lateinit var recyclerView: RecyclerView
     lateinit var binding: ListNeighborsFragmentBinding
     private lateinit var viewModel: NeighborViewModel
+    var persitent: Boolean = false
 
     /**
      * Fonction permettant de définir une vue à attacher à un fragment
@@ -54,19 +53,46 @@ class ListNeighborsFragment : Fragment(), ListNeighborHandler {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel = ViewModelProvider(this).get(NeighborViewModel::class.java)
+
         (activity as? NavigationListener)?.let {
             it.updateTitle(R.string.list_neighbor)
         }
+
+        setHasOptionsMenu(true)
 
         setData()
 
         onAddNeighbor()
     }
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_type_data, menu)
+
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.menu_no_persistent -> {
+                persitent = false
+            }
+
+            R.id.menu_persistent -> {
+                persitent = true
+            }
+
+            else -> super.onOptionsItemSelected(item)
+        }
+
+        return true
+    }
+
     private fun setData() {
-        viewModel.neighbors.observe(viewLifecycleOwner) {
-            val adapter = ListNeighborsAdapter(it, this)
-            binding.neighborsList.adapter = adapter
+        if (persitent) {
+            viewModel.neighbors.observe(viewLifecycleOwner) {
+                val adapter = ListNeighborsAdapter(it, this)
+                binding.neighborsList.adapter = adapter
+            }
         }
     }
 
@@ -101,7 +127,9 @@ class ListNeighborsFragment : Fragment(), ListNeighborHandler {
     }
 
     override fun onAddFavorite(neighbor: Neighbor) {
-        DI.repository.onFavorite(neighbor)
+        Executors.newSingleThreadExecutor().execute {
+            DI.repository.onFavorite(neighbor)
+        }
     }
 
     override fun goWebsite(neighbor: Neighbor) {

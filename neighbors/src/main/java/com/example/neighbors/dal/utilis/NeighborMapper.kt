@@ -24,3 +24,14 @@ fun Neighbor.toEntity() = NeighborEntity(
     favorite = favorite,
     webSite = webSite
 )
+
+fun Neighbor.toEntity(favorite: Boolean) = NeighborEntity(
+    id = id.toLong(),
+    name = name,
+    avatarUrl = avatarUrl,
+    address = address,
+    phoneNumber = phoneNumber,
+    aboutMe = aboutMe,
+    favorite = favorite,
+    webSite = webSite
+)

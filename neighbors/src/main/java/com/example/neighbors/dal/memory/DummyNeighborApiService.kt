@@ -24,13 +24,11 @@ class DummyNeighborApiService : NeighborApiService {
 
     override fun createNeighbour(neighbor: Neighbor) {
         neighbor.id = DUMMY_NeighborS.size.toLong() + 1
-        DUMMY_NeighborS.add(neighbor)
-        _neighbours.value = DUMMY_NeighborS.toList()
+        _neighbours.postValue(DUMMY_NeighborS)
     }
 
     override fun updateFavoriteStatus(neighbor: Neighbor) {
-        neighbor.favorite = !neighbor.favorite
-        _neighbours.value = DUMMY_NeighborS.toList()
+        _neighbours.postValue(DUMMY_NeighborS)
 
         /*DUMMY_NeighborS.find {
             it.id == neighbor.id

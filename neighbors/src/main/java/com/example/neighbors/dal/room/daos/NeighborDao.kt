@@ -1,10 +1,7 @@
 package com.example.neighbors.dal.room.daos
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.Query
+import androidx.room.*
 import com.example.neighbors.dal.room.entities.NeighborEntity
 
 @Dao
@@ -17,4 +14,7 @@ interface NeighborDao {
 
     @Delete
     fun deleteNeighbor(entity: NeighborEntity)
+
+    @Update
+    fun updateNeighborFavoriteStatus(entity: NeighborEntity)
 }

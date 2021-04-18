@@ -36,7 +36,7 @@ class RoomNeighborDataSource(application: Application) : NeighborApiService {
     }
 
     override fun updateFavoriteStatus(neighbor: Neighbor) {
-        TODO("Not yet implemented")
+        dao.updateNeighborFavoriteStatus(neighbor.toEntity(!neighbor.favorite))
     }
 
     override fun updateDataNeighbour(neighbor: Neighbor) {
