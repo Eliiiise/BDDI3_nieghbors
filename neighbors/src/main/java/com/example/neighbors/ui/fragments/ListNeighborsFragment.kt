@@ -88,11 +88,16 @@ class ListNeighborsFragment : Fragment(), ListNeighborHandler {
     }
 
     private fun setData() {
-        if (persitent) {
+        /* if (persitent) {
             viewModel.neighbors.observe(viewLifecycleOwner) {
                 val adapter = ListNeighborsAdapter(it, this)
                 binding.neighborsList.adapter = adapter
             }
+        } */
+
+        viewModel.neighbors.observe(viewLifecycleOwner) {
+            val adapter = ListNeighborsAdapter(it, this)
+            binding.neighborsList.adapter = adapter
         }
     }
 
