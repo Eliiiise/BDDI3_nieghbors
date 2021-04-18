@@ -65,7 +65,7 @@ class AddNeighborsFragment : Fragment() {
             }
 
             textPhone.doAfterTextChanged {
-                if (!(textPhone.text!!.startsWith("06")) || !(textPhone.text!!.startsWith("07")) && (textPhone.text!!.count() != 10)) {
+                if (!((textPhone.text!!.startsWith("06")) || (textPhone.text!!.startsWith("07")) && (textPhone.text!!.count() == 10))) {
                     textPhone.setError(getString(R.string.error_phone))
                 }
                 enableButton()

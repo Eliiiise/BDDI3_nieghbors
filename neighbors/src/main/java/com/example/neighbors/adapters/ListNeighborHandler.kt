@@ -7,4 +7,5 @@ interface ListNeighborHandler {
     fun onAddFavorite(neighbor: Neighbor)
     fun goWebsite(neighbor: Neighbor)
     fun onAddNeighbor()
+    fun onViewDetails(neighbor: Neighbor)
 }

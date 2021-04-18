@@ -16,4 +16,5 @@
     <string name="error_link">Le lien n\'est pas valide</string>
     <string name="add_neighbor">Nouveau voisin</string>
     <string name="list_neighbor">Liste des voisins</string>
+    <string name="details_neighbor">Détail du voisin</string>
 </resources>

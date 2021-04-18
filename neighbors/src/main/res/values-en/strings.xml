@@ -17,4 +17,5 @@
     <string name="error_link">Invalid url</string>
     <string name="add_neighbor">New neighbor</string>
     <string name="list_neighbor">List neighbor</string>
+    <string name="details_neighbor">Details neighbor</string>
 </resources>

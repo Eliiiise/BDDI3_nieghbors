@@ -4,9 +4,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.example.neighbors.NavigationListener
 import com.example.neighbors.R
 import com.example.neighbors.databinding.NeighborItemBinding
 import com.example.neighbors.models.Neighbor
+import com.example.neighbors.ui.fragments.AddNeighborsFragment
 
 class ListNeighborsAdapter(
     items: List<Neighbor>,
@@ -24,6 +26,10 @@ class ListNeighborsAdapter(
         val neighbour: Neighbor = mNeighbours[position]
 
         holder.binding.neighbor = neighbour
+
+        holder.binding.itemContainer.setOnClickListener {
+            mNeighboursHandler.onViewDetails(neighbour)
+        }
 
         holder.binding.itemListLikeButton.setOnClickListener {
             mNeighboursHandler.onAddFavorite(neighbour)

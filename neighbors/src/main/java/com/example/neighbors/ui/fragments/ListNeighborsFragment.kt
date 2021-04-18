@@ -150,4 +150,10 @@ class ListNeighborsFragment : Fragment(), ListNeighborHandler {
             }
         }
     }
+
+    override fun onViewDetails(neighbor: Neighbor) {
+        (activity as? NavigationListener)?.let {
+            it.showFragment(DetailsNeighborsFragment(neighbor))
+        }
+    }
 }

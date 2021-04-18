@@ -20,6 +20,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
             xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/item_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:clickable="true"
@@ -34,7 +35,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
-                android:src="@drawable/ic_baseline_delete_outline_24"
+                app:srcCompat="@drawable/ic_baseline_perm_identity_24"
                 app:layout_constraintStart_toStartOf="parent"
                 app:avatar="@{neighbor.avatarUrl}"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -57,7 +58,6 @@
                 app:layout_constraintStart_toStartOf="@+id/item_list_name"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginTop="5sp"
-                android:lines="10"
                 android:text="@{neighbor.aboutMe}"
                 app:layout_constraintTop_toBottomOf="@+id/item_list_name"
                 tools:text="@tools:sample/lorem/random"/>
